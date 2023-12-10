@@ -39,5 +39,10 @@ else:
     print("No directory selected")
 
 # Store the vault path in a text file
-with open("Variables.txt", "w") as f:
-    f.write(f"Vault path: {vault_path}")
+# check if the file already exists
+if os.path.exists("Vaults.txt"):
+    with open("Vaults.txt", "a") as f:
+        f.write(f"\nVault path: {vault_path}")
+else:
+    with open("Vaults.txt", "w") as f:
+        f.write(f"Vault path: {vault_path}")
