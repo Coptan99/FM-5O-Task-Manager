@@ -1,32 +1,38 @@
-# Native imports
-import tkinter as tk
-from tkinter import ttk
+import sys
+import os
+import subprocess
+import functions
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.uic import loadUi
+cwd = os.getcwd()
 
-# Custom imports
-from functions import *
 
-# Initializing the gui window
-app = tk.Tk()
-app.title("FMO")
-# app.config(bg="#222222")
+class anotherUI(QMainWindow):
+    def __init__(self):
+        super(anotherUI, self).__init__()
+        loadUi('./gui/untitled.ui', self)
 
-# Creating the widgets
-entry = ttk.Entry()
+class MainUI(QMainWindow):
+    def __init__(self):
+        super(MainUI, self).__init__()
+        loadUi('./gui/mainwin.ui', self)
+        self.setWindowTitle('FMO Task Manager')
+        self.one_btn.clicked.connect(self.one_btn_clicked)
+        self.two_btn.clicked.connect(self.two_btn_clicked)
+        self.three_btn.clicked.connect(self.show_anotherUI)
 
-# main_label = ttk.Label(text="FMO Task Manager", font=(
-#     "Source Code Pro", 20), padding=10, background="#222222", foreground="#ffffff")
-main_label = ttk.Label(text="FMO Task Manager", font=("Source Code Pro", 20), padding=10)
-main_label.pack()
+    def one_btn_clicked(self):
+        subprocess.run(["xdg-open", "./tasks/tasks.md"])
 
-# label = ttk.Label(text="Enter your task: ", font=(
-#     "Source Code Pro", 10), padding=10, background="#222222", foreground="#ffffff")
-label = ttk.Label(text="Enter your task: ", font=("Source Code Pro", 10), padding=10)
-label.pack()
+    def two_btn_clicked(self):
+        subprocess.run(["xdg-open", "./tasks/last_visited.md"])
 
-entry.pack()
+    def show_anotherUI(self):
+        self.window = anotherUI()
+        self.window.show()
 
-main_button = ttk.Button(text="Add", command=add_task)
-main_button.pack()
-
-# Main loop
-app.mainloop()
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    main = MainUI()
+    main.show()
+    app.exec_()
