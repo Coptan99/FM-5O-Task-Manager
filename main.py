@@ -1,17 +1,17 @@
+# Normal imports
 import sys
 import os
 import subprocess
-import functions
+
+# Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.uic import loadUi
+
+# Variables
 cwd = os.getcwd()
 
 
-class anotherUI(QMainWindow):
-    def __init__(self):
-        super(anotherUI, self).__init__()
-        loadUi('./gui/untitled.ui', self)
-
+# Our fancy UI
 class MainUI(QMainWindow):
     def __init__(self):
         super(MainUI, self).__init__()
@@ -27,10 +27,8 @@ class MainUI(QMainWindow):
     def two_btn_clicked(self):
         subprocess.run(["xdg-open", "./tasks/last_visited.md"])
 
-    def show_anotherUI(self):
-        self.window = anotherUI()
-        self.window.show()
 
+# Initialize the app
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     main = MainUI()
