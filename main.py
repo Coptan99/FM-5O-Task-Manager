@@ -1,6 +1,5 @@
 # Normal imports
 import sys
-import os
 
 # Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -8,9 +7,6 @@ from PyQt5.uic import loadUi
 
 # Custom imports
 from classes import *
-
-# Variables
-cwd = os.getcwd()
 
 
 # Our fancy UI
@@ -44,6 +40,7 @@ class MainUI(QMainWindow):
 
     def four_btn_clicked(self):
         pass
+
 
 # Initialize the app
 if __name__ == '__main__':
