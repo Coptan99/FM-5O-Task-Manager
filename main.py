@@ -1,49 +1,16 @@
 # Normal imports
 import sys
 import os
-import subprocess
 
 # Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.uic import loadUi
+
+# Custom imports
+from classes import *
 
 # Variables
 cwd = os.getcwd()
-
-
-# Our file manager
-class lastVisited(QMainWindow):
-    def __init__(self):
-        super(lastVisited, self).__init__()
-        loadUi('./gui/fman.ui', self)
-        self.browse.clicked.connect(self.browsefiles)
-        self.ok_btn.clicked.connect(self.openfiles)
-
-    def browsefiles(self):
-        fname = QFileDialog.getOpenFileName(
-            self, 'Open File', cwd + '/tasks/last_visited')
-        self.filename.setText(fname[0])
-
-    def openfiles(self):
-        text = self.filename.text()
-        subprocess.run(["xdg-open", text])
-
-
-class pinnedTasks(QMainWindow):
-    def __init__(self):
-        super(pinnedTasks, self).__init__()
-        loadUi('./gui/fman.ui', self)
-        self.browse.clicked.connect(self.browsefiles)
-        self.ok_btn.clicked.connect(self.openfiles)
-
-    def browsefiles(self):
-        fname = QFileDialog.getOpenFileName(
-            self, 'Open File', cwd + '/tasks/pinned_tasks')
-        self.filename.setText(fname[0])
-
-    def openfiles(self):
-        text = self.filename.text()
-        subprocess.run(["xdg-open", text])
 
 
 # Our fancy UI
@@ -61,7 +28,8 @@ class MainUI(QMainWindow):
         self.four_btn.clicked.connect(self.four_btn_clicked)
 
     def zero_btn_clicked(self):
-        pass
+        self.file = newTask()
+        self.file.show()
 
     def one_btn_clicked(self):
         self.file = lastVisited()
@@ -76,7 +44,6 @@ class MainUI(QMainWindow):
 
     def four_btn_clicked(self):
         pass
-
 
 # Initialize the app
 if __name__ == '__main__':
