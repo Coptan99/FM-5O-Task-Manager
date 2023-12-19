@@ -13,6 +13,12 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+	background-color: rgb(8, 0, 71);
+}
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
@@ -27,6 +33,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="ok_btn">
+        <property name="text">
+         <string>Ok</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
@@ -37,7 +50,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>
