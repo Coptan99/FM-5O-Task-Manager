@@ -1,15 +1,14 @@
 import os
-import sys
-import shutil
-import AddVault
-import RemoveVault
-import MoveVault
-import RenameVault
-import RenameVault
-import AddFile
-import RemoveFile
-import MoveFile
-import RenameFile
+from AddVault import *
+from RemoveVault import *
+from MoveVault import *
+from RenameVault import *
+from ChooseVault import *
+from ChooseFile import *
+from AddFile import *
+from RemoveFile import *
+from MoveFile import *
+from RenameFile import *
 
 if os.path.exists("Variables.txt"):
     with open("Variables.txt", "a") as f:
