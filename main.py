@@ -4,23 +4,47 @@ import os
 import subprocess
 
 # Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.uic import loadUi
 
 # Variables
 cwd = os.getcwd()
-file = cwd + '/tasks/task.txt'
 
-class Fman(QMainWindow):
+
+# Our file manager
+class lastVisited(QMainWindow):
     def __init__(self):
-        super(Fman, self).__init__()
+        super(lastVisited, self).__init__()
         loadUi('./gui/fman.ui', self)
         self.browse.clicked.connect(self.browsefiles)
-        
+        self.ok_btn.clicked.connect(self.openfiles)
+
     def browsefiles(self):
-        fname = QFileDialog.getOpenFileName(self, 'Open File', cwd + '/tasks')
+        fname = QFileDialog.getOpenFileName(
+            self, 'Open File', cwd + '/tasks/last_visited')
         self.filename.setText(fname[0])
-        
+
+    def openfiles(self):
+        text = self.filename.text()
+        subprocess.run(["xdg-open", text])
+
+
+class pinnedTasks(QMainWindow):
+    def __init__(self):
+        super(pinnedTasks, self).__init__()
+        loadUi('./gui/fman.ui', self)
+        self.browse.clicked.connect(self.browsefiles)
+        self.ok_btn.clicked.connect(self.openfiles)
+
+    def browsefiles(self):
+        fname = QFileDialog.getOpenFileName(
+            self, 'Open File', cwd + '/tasks/pinned_tasks')
+        self.filename.setText(fname[0])
+
+    def openfiles(self):
+        text = self.filename.text()
+        subprocess.run(["xdg-open", text])
+
 
 # Our fancy UI
 class MainUI(QMainWindow):
@@ -28,17 +52,30 @@ class MainUI(QMainWindow):
         super(MainUI, self).__init__()
         loadUi('./gui/mainwin.ui', self)
         self.setWindowTitle('FMO Task Manager')
-        
+
         # Defining functions for buttons
+        self.zero_btn.clicked.connect(self.zero_btn_clicked)
         self.one_btn.clicked.connect(self.one_btn_clicked)
         self.two_btn.clicked.connect(self.two_btn_clicked)
+        self.three_btn.clicked.connect(self.three_btn_clicked)
+        self.four_btn.clicked.connect(self.four_btn_clicked)
+
+    def zero_btn_clicked(self):
+        pass
 
     def one_btn_clicked(self):
-        self.file = Fman()
+        self.file = lastVisited()
         self.file.show()
 
     def two_btn_clicked(self):
-        subprocess.run(["xdg-open", "./tasks/last_visited.md"])
+        self.file = pinnedTasks()
+        self.file.show()
+
+    def three_btn_clicked(self):
+        pass
+
+    def four_btn_clicked(self):
+        pass
 
 
 # Initialize the app
