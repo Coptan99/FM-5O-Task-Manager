@@ -1,5 +1,6 @@
 # Normal imports
 import sys
+import os
 
 # Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -7,6 +8,9 @@ from PyQt5.uic import loadUi
 
 # Custom imports
 from classes import *
+
+# Variables
+cwd = os.getcwd()
 
 
 # Our fancy UI
@@ -22,6 +26,7 @@ class MainUI(QMainWindow):
         self.two_btn.clicked.connect(self.two_btn_clicked)
         self.three_btn.clicked.connect(self.three_btn_clicked)
         self.four_btn.clicked.connect(self.four_btn_clicked)
+        self.five_btn.clicked.connect(self.five_btn_clicked)
 
     def zero_btn_clicked(self):
         self.file = newTask()
@@ -40,6 +45,11 @@ class MainUI(QMainWindow):
 
     def four_btn_clicked(self):
         pass
+
+    def five_btn_clicked(self):
+        tasks_n = os.listdir(cwd + '/tasks/tasks')
+        for task in tasks_n:
+            print(task)
 
 
 # Initialize the app
