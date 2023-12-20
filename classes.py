@@ -43,6 +43,20 @@ class newTask(QMainWindow):
                 f.write(task_content + '\n')
 
 
+# List of tasks window
+class listTasks(QMainWindow):
+    def __init__(self):
+        super(listTasks, self).__init__()
+        loadUi('./gui/list.ui', self)
+        self.setWindowTitle('List of Tasks')
+        self.listTasks()
+
+    def listTasks(self):
+        tasks_n = os.listdir(cwd + '/tasks/tasks')
+        for task in tasks_n:
+            self.textBrowser.append(task)
+
+
 # Our Last Visited file manager
 class lastVisited(QMainWindow):
     def __init__(self):

@@ -47,10 +47,8 @@ class MainUI(QMainWindow):
         pass
 
     def five_btn_clicked(self):
-        tasks_n = os.listdir(cwd + '/tasks/tasks')
-        for task in tasks_n:
-            print(task)
-
+        self.file = listTasks()
+        self.file.show()
 
 # Initialize the app
 if __name__ == '__main__':
