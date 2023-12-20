@@ -23,7 +23,7 @@ class newTask(QMainWindow):
 
     def addTask(self):
         file = (self.fileName.text() + '.txt').lower()
-        task_content = self.task.toPlainText()
+        task_content = (self.task.toPlainText()).replace(' ', '_')
         if not os.path.exists(tasks):
             os.makedirs(tasks)
         elif self.fileName.text() == '':
