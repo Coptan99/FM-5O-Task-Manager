@@ -3,6 +3,7 @@ import sys
 import os
 
 # Qt
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.uic import loadUi
 
@@ -18,6 +19,7 @@ class MainUI(QMainWindow):
     def __init__(self):
         super(MainUI, self).__init__()
         loadUi('./gui/mainwin.ui', self)
+        self.setWindowIcon(QtGui.QIcon(cwd + '/assests/logo.png'))
         self.setWindowTitle('FMO Task Manager')
 
         # Defining functions for buttons

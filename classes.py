@@ -5,6 +5,7 @@ import os
 import subprocess
 
 # Qt
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QErrorMessage
 from PyQt5.uic import loadUi
 
@@ -18,6 +19,7 @@ class newTask(QMainWindow):
     def __init__(self):
         super(newTask, self).__init__()
         loadUi('./gui/newtask.ui', self)
+        self.setWindowIcon(QtGui.QIcon(cwd + '/assests/logo.png'))
         self.setWindowTitle('Add a new task')
         self.add_btn.clicked.connect(self.addTask)
 
@@ -48,6 +50,7 @@ class listTasks(QMainWindow):
     def __init__(self):
         super(listTasks, self).__init__()
         loadUi('./gui/list.ui', self)
+        self.setWindowIcon(QtGui.QIcon(cwd + '/assests/logo.png'))
         self.setWindowTitle('List of Tasks')
         self.listTasks()
 
@@ -62,6 +65,7 @@ class lastVisited(QMainWindow):
     def __init__(self):
         super(lastVisited, self).__init__()
         loadUi('./gui/fman.ui', self)
+        self.setWindowIcon(QtGui.QIcon(cwd + '/assests/logo.png'))
         self.browse.clicked.connect(self.browsefiles)
         self.ok_btn.clicked.connect(self.openfiles)
         self.setWindowTitle('Select Last Visited File')
@@ -81,6 +85,7 @@ class pinnedTasks(QMainWindow):
     def __init__(self):
         super(pinnedTasks, self).__init__()
         loadUi('./gui/fman.ui', self)
+        self.setWindowIcon(QtGui.QIcon(cwd + '/assests/logo.png'))
         self.browse.clicked.connect(self.browsefiles)
         self.ok_btn.clicked.connect(self.openfiles)
         self.setWindowTitle('Select Pinned Tasks File')
