@@ -5,12 +5,12 @@ import os
 import subprocess
 
 # Qt
-from PyQt5.QtWidgets import QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QErrorMessage
 from PyQt5.uic import loadUi
 
 # Variables
 cwd = os.getcwd()
-tasks = cwd + '/tasks'
+tasks = cwd + '/tasks/tasks'
 
 
 # New task window
@@ -22,12 +22,25 @@ class newTask(QMainWindow):
         self.add_btn.clicked.connect(self.addTask)
 
     def addTask(self):
-        if not os.path.exists(tasks):
-            os.makedirs(tasks)
         file = (self.fileName.text() + '.txt').lower()
         task_content = self.task.toPlainText()
-        with open(os.path.join(tasks, file), 'a') as f:
-            f.write(task_content + '\n')
+        if not os.path.exists(tasks):
+            os.makedirs(tasks)
+        elif self.fileName.text() == '':
+            error_dialog = QErrorMessage()
+            error_dialog.showMessage('Please specify a name for the file')
+            error_dialog.setWindowTitle('Error')
+            error_dialog.exec_()
+            return
+        elif task_content == '':
+            error_dialog = QErrorMessage()
+            error_dialog.showMessage('Please specify a task')
+            error_dialog.setWindowTitle('Error')
+            error_dialog.exec_()
+            return
+        else:
+            with open(os.path.join(tasks, file), 'a') as f:
+                f.write(task_content + '\n')
 
 
 # Our Last Visited file manager
