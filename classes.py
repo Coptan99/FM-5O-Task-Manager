@@ -98,3 +98,30 @@ class pinnedTasks(QMainWindow):
     def openfiles(self):
         text = self.filename.text()
         subprocess.run(["xdg-open", text])
+
+
+# Create vault window
+class createVault(QMainWindow):
+    def __init__(self):
+        super(createVault, self).__init__()
+        loadUi('./gui/AddVault.ui', self)
+        self.setWindowIcon(QtGui.QIcon(cwd + '/assests/logo.png'))
+        self.setWindowTitle('Create a new vault')
+        self.ChooseButton.clicked.connect(self.browsefiles)
+
+    def browsefiles(self):
+        fname = QFileDialog.getOpenFileName(
+            self, 'Open Vaults', cwd + '/FileManip')
+        self.filename.setText(fname[0])
+
+    # def createVault(self):
+    #     vault_name = self.vault_name.text()
+    #     if vault_name == '':
+    #         error_dialog = QErrorMessage()
+    #         error_dialog.showMessage('Please specify a name for the vault')
+    #         error_dialog.setWindowTitle('Error')
+    #         error_dialog.exec_()
+    #         return
+    #     else:
+    #         os.makedirs(cwd + '/vaults/' + vault_name)
+    #         self.close()

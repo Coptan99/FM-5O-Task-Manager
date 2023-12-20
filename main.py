@@ -43,7 +43,8 @@ class MainUI(QMainWindow):
         self.file.show()
 
     def three_btn_clicked(self):
-        pass
+        self.file = createVault()
+        self.file.show()
 
     def four_btn_clicked(self):
         pass
