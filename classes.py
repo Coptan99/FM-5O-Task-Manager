@@ -10,14 +10,24 @@ from PyQt5.uic import loadUi
 
 # Variables
 cwd = os.getcwd()
+tasks = cwd + '/tasks'
+
+
 # New task window
-
-
 class newTask(QMainWindow):
     def __init__(self):
         super(newTask, self).__init__()
         loadUi('./gui/newtask.ui', self)
         self.setWindowTitle('Add a new task')
+        self.add_btn.clicked.connect(self.addTask)
+
+    def addTask(self):
+        if not os.path.exists(tasks):
+            os.makedirs(tasks)
+        file = (self.fileName.text() + '.txt').lower()
+        task_content = self.task.toPlainText()
+        with open(os.path.join(tasks, file), 'a') as f:
+            f.write(task_content + '\n')
 
 
 # Our Last Visited file manager
